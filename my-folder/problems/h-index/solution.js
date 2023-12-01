@@ -3,14 +3,13 @@
  * @return {number}
  */
 var hIndex = function(citations) {
-    let highest = 0
-    
+    let highestH = 0
+    citations.sort((a,b) => a-b) 
+
     for (let i = 0; i < citations.length; i++) {
-        const papers = citations.filter(cit => cit >= citations[i])
-        if(citations[i] > highest && papers.length > highest) {
-            highest = citations[i] < papers.length ? citations[i] : papers.length
-        }
+        const numOfDocsWithCits = citations.length - i
+        highestH = numOfDocsWithCits > citations[i] ? citations[i] : numOfDocsWithCits > highestH ? numOfDocsWithCits : highestH
     }
 
-    return highest
+    return highestH
 };
