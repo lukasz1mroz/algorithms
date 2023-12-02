@@ -11,13 +11,15 @@ var canCompleteCircuit = function(gas, cost) {
 
     while(i < gas.length) {
         if(gas[i] > 0 && tanksAfter[i] >= 0 && !(gas[i] === gas[i-1] && cost[i] === cost[i-1])) {
-            const currArr = [...tanksAfter.slice(i), ...tanksAfter.slice(0,i+1)]
-            let currSum = currArr[0]
-            console.log('currArr: ', currArr)
-            for(let j = 1; j < currArr.length; j++) {
-                currSum += currArr[j]
+            let currSum = tanksAfter[i]
+            let k = i+1
+
+            for(let j = 0; j <= tanksAfter.length; j++) {
+                if(k > tanksAfter.length - 1) k = 0
+                currSum += tanksAfter[k]
+                k++
                 if(currSum < 0) break
-                if(j === currArr.length - 1) return i
+                if(j === tanksAfter.length) return i
             }
         }
         i++
